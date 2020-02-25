@@ -25,4 +25,4 @@ npm run build
 
 
 # TODO
-[] Adding UI Components 🚀
+[ ] Adding UI Components 🚀
