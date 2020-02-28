@@ -1,11 +1,16 @@
 const path = require('path');
-const htmlWebPackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const HOST = process.env.HOST || 'localhost';
+const PORT = process.env.PORT || 3000;
+const PROXY = `http://${HOST}:${PORT}`;
 
 module.exports = {
     entry: './src/index.js',
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, './build')
+        path: path.resolve(__dirname, './build'),
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -49,8 +54,14 @@ module.exports = {
             }
         ]
     },
+    devtool: 'source-map',
+    devServer: {
+        host: HOST,
+        port: PORT,
+        historyApiFallback: true
+    },
     plugins: [
-        new htmlWebPackPlugin({
+        new HtmlWebpackPlugin({
             template: './public/index.html',
             filename: './index.html'
         })
